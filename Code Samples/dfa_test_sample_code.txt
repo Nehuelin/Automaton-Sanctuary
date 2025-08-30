@@ -1,0 +1,121 @@
+IMPORTANT: PASTE ONLY ONE AT A TIME, OTHERWISE THERE WILL BE VARIABLE CONFLICTS
+
+	// 1) Given the alphabet Σ = {0, 1}, the following DFA accepts all strings ending with at least two consecutive '1's
+
+        HashSet<Character> alphabet = new HashSet<>();
+
+        alphabet.add('0');
+        alphabet.add('1');
+
+        System.out.println(alphabet);
+
+        HashSet<String> states = new HashSet<>();
+        states.add("q0");
+        states.add("q1");
+        states.add("q2");
+
+        for(String state : states) {
+            System.out.println(state);
+        }
+
+        HashSet<String> acceptStates = new HashSet<>();
+        acceptStates.add("q2");
+
+        HashSet<Transition> transitions = new HashMap<>();
+        transitions.add(new Transition("q0", '0', "q0"));
+        transitions.add(new Transition("q0", '1', "q1"));
+        transitions.add(new Transition("q1", '0', "q0"));
+        transitions.add(new Transition("q1", '1', "q2"));
+        transitions.add(new Transition("q2", '0', "q0"));
+        transitions.add(new Transition("q2", '1', "q2"));
+
+        DFA automaton = new DFA(states, alphabet, transitions, "q0", acceptStates);
+
+        System.out.println(automaton.accept("100011")); // Should return true
+        System.out.println(automaton.accept("10101")); // Should return false
+
+        System.out.println(automaton.getTransitions().toString());
+
+
+
+	// 2) Given the alphabet Σ = {0, 1}, the following DFA accepts all strings that have at most two '0's in them.
+ 
+        HashSet<Character> alphabet = new HashSet<>();
+
+        alphabet.add('0');
+        alphabet.add('1');
+
+        System.out.println(alphabet);
+
+        HashSet<String> states = new HashSet<>();
+        states.add("q0");
+        states.add("q1");
+        states.add("q2");
+        states.add("q3");
+
+        for(String state : states) {
+            System.out.println(state);
+        }
+
+        HashSet<String> acceptStates = new HashSet<>();
+        acceptStates.add("q0");
+        acceptStates.add("q1");
+        acceptStates.add("q2");
+
+        HashSet<Transition> transitions = new HashSet<>();
+        transitions.add(new Transition("q0", '0', "q1"));
+        transitions.add(new Transition("q0", '1', "q0"));
+        transitions.add(new Transition("q1", '0', "q2"));
+        transitions.add(new Transition("q1", '1', "q1"));
+        transitions.add(new Transition("q2", '0', "q3"));
+        transitions.add(new Transition("q2", '1', "q2"));
+        transitions.add(new Transition("q3", '0', "q3"));
+        transitions.add(new Transition("q3", '1', "q3"));
+
+        DFA automaton = new DFA(states, alphabet, transitions, "q0", acceptStates);
+
+        System.out.println(automaton.accept("10011")); // Should return true
+        System.out.println(automaton.accept("10001")); // Should return false
+
+        System.out.println(automaton.getTransitions().toString());
+
+
+
+	// 3) Given the alphabet Σ = {0, 1}, the following DFA accepts all strings that have an even number of '0s' and '1s'.
+
+        HashSet<Character> alphabet = new HashSet<>();
+
+        alphabet.add('0');
+        alphabet.add('1');
+
+        System.out.println(alphabet);
+
+        HashSet<String> states = new HashSet<>();
+        states.add("q0");
+        states.add("q1");
+        states.add("q2");
+        states.add("q3");
+
+        for(String state : states) {
+            System.out.println(state);
+        }
+
+        HashSet<String> acceptStates = new HashSet<>();
+        acceptStates.add("q0");
+
+        HashSet<Transition> transitions = new HashSet<>();
+        transitions.add(new Transition("q0", '0', "q1"));
+        transitions.add(new Transition("q0", '1', "q3"));
+        transitions.add(new Transition("q1", '0', "q0"));
+        transitions.add(new Transition("q1", '1', "q2"));
+        transitions.add(new Transition("q2", '0', "q3"));
+        transitions.add(new Transition("q2", '1', "q1"));
+        transitions.add(new Transition("q3", '0', "q2"));
+        transitions.add(new Transition("q3", '1', "q0"));
+
+        DFA automaton = new DFA(states, alphabet, transitions, "q0", acceptStates);
+
+        System.out.println(automaton.accept("100111")); // Should return true
+        System.out.println(automaton.accept("1010010")); // Should return false
+
+        System.out.println(automaton.getTransitionFunction().toString());

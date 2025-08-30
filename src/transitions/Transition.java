@@ -1,3 +1,5 @@
+package transitions;
+
 public class Transition {
     private String fromState;
     private Character symbol;
@@ -9,15 +11,23 @@ public class Transition {
         this.toState = toState;
     }
 
+    @Override
+    public String toString() {
+        return "Transition{" + "fromState=" + fromState + ", symbol=" + symbol + ", toState=" + toState + '}';
+    }
+
     public String getFromState() {
         return fromState;
     }
+
     public void setFromState(String fromState) {
         this.fromState = fromState;
     }
+
     public Character getSymbol() {
         return symbol;
     }
+
     public void setSymbol(Character symbol) {
         this.symbol = symbol;
     }
@@ -25,6 +35,7 @@ public class Transition {
     public String getToState() {
         return toState;
     }
+
     public void setToState(String toState) {
         this.toState = toState;
     }

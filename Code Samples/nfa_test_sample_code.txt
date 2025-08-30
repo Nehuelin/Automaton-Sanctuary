@@ -1,0 +1,129 @@
+IMPORTANT: PASTE ONLY ONE AT A TIME, OTHERWISE THERE WILL BE VARIABLE CONFLICTS
+
+    // 1) Given the alphabet Σ = {0, 1}, the following DFA accepts all strings that:
+    //      --> Starts with an undetermined amount of 0s and 1s,
+    //      --> Follows with a 1, then an optional 0, then a 1 again
+    //      --> Ends with an undetermined amount of 0s and 1s
+
+    // Writen as regex: L = (0 U 1)*1(0 U e)1(0 U 1)*
+
+        HashSet<Character> alphabet = new HashSet<>();
+
+        alphabet.add('0');
+        alphabet.add('1');
+
+        System.out.println(alphabet);
+
+        HashSet<String> states = new HashSet<>();
+        states.add("q0");
+        states.add("q1");
+        states.add("q2");
+        states.add("q3");
+
+        for(String state : states) {
+            System.out.println(state);
+        }
+
+        HashSet<Transition> transitions = new HashSet<>();
+        transitions.add(new Transition("q0", '0', "q0"));
+        transitions.add(new Transition("q0", '1', "q0"));
+        transitions.add(new Transition("q0", '1', "q1"));
+        transitions.add(new Transition("q1", '0', "q2"));
+        transitions.add(new Transition("q1", 'e', "q2"));
+        transitions.add(new Transition("q2", '1', "q3"));
+        transitions.add(new Transition("q3", '0', "q3"));
+        transitions.add(new Transition("q3", '1', "q3"));
+
+        HashSet<String> acceptStates = new HashSet<>();
+        acceptStates.add("q3");
+
+        NFA automaton = new NFA(states, alphabet, transitions, "q0", acceptStates);
+
+        System.out.println(automaton.accept("010110")); // Should return true
+        System.out.println(automaton.accept("010000")); // Should return false
+
+        System.out.println(automaton.getTransitions().toString());
+
+
+
+    // 2) Given the alphabet Σ = {a, b}, the following DFA accepts all strings that has an undetermined amount of "ab" and/or "aba"
+
+    // Writen as regex: L = (ab U aba)*
+
+        HashSet<Character> alphabet = new HashSet<>();
+
+        alphabet.add('a');
+        alphabet.add('b');
+
+        System.out.println(alphabet);
+
+        HashSet<String> states = new HashSet<>();
+        states.add("q0");
+        states.add("q1");
+        states.add("q2");
+
+        for(String state : states) {
+            System.out.println(state);
+        }
+
+        HashSet<Transition> transitions = new HashSet<>();
+        transitions.add(new Transition("q0", 'a', "q1"));
+        transitions.add(new Transition("q1", 'b', "q0"));
+        transitions.add(new Transition("q1", 'b', "q2"));
+        transitions.add(new Transition("q2", 'a', "q0"));
+
+        HashSet<String> acceptStates = new HashSet<>();
+        acceptStates.add("q0");
+
+        NFA automaton = new NFA(states, alphabet, transitions, "q0", acceptStates);
+
+        System.out.println(automaton.accept("ababa")); // Should return true
+        System.out.println(automaton.accept("abbaba")); // Should return false
+
+        System.out.println(automaton.getTransitions().toString());
+
+
+    // 3) Given the alphabet Σ = {a, b, c}, the following DFA accepts all strings that don't contain all symbols in Σ = {a, b, c}.
+
+    // Writen as regex: L = (a U b)* U (a U c)* U (b U c)*
+
+        HashSet<Character> alphabet = new HashSet<>();
+
+        alphabet.add('a');
+        alphabet.add('b');
+        alphabet.add('c');
+
+        System.out.println(alphabet);
+
+        HashSet<String> states = new HashSet<>();
+        states.add("q0");
+        states.add("q1");
+        states.add("q2");
+        states.add("q3");
+
+        for(String state : states) {
+            System.out.println(state);
+        }
+
+        HashSet<Transition> transitions = new HashSet<>();
+        transitions.add(new Transition("q0", 'e', "q1"));
+        transitions.add(new Transition("q0", 'e', "q2"));
+        transitions.add(new Transition("q0", 'e', "q3"));
+        transitions.add(new Transition("q1", 'a', "q1"));
+        transitions.add(new Transition("q1", 'b', "q1"));
+        transitions.add(new Transition("q2", 'a', "q2"));
+        transitions.add(new Transition("q2", 'c', "q2"));
+        transitions.add(new Transition("q3", 'b', "q3"));
+        transitions.add(new Transition("q3", 'c', "q3"));
+
+        HashSet<String> acceptStates = new HashSet<>();
+        acceptStates.add("q1");
+        acceptStates.add("q2");
+        acceptStates.add("q3");
+
+        NFA automaton = new NFA(states, alphabet, transitions, "q0", acceptStates);
+
+        System.out.println(automaton.accept("acccaaca")); // Should return true
+        System.out.println(automaton.accept("abbbacab")); // Should return false
+
+        System.out.println(automaton.getTransitions().toString());

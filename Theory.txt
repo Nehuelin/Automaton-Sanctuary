@@ -13,15 +13,18 @@ STATES
 Formal definition:
 	--> A state is a configuration or mode of the machine
 
-In order to identify said states, we will describe them as Strings.
+To identify said states, we will describe them as Strings.
 
-DFA IMPLEMENTATION
+regularlanguages.DFA IMPLEMENTATION
 
 
-Transition Function
+transitions.Transition Function
 
 Formal definition:
 	--> The transition function δ is -> δ : Q × Σ → Q, where Q = set of states, Σ = alphabet and the output is the next state.
 
-In the Java implementation a Map is used: Map<String, Map<Character, String>>. This means that it will have the states names as keys and will give all possible outcomes as values (depending on the character, which is yet another key, it will move to the next state, which is the value). For example, if i have 'q0', 'q1' and 'q2' as state names, the transition function could read that if i use 'q0' as a key, then it will check what symbol is currently reading, and, in consequence, it will move to the corresponding state. For instance, if 'q0' had more than one transition available, then the DFA will pick the one corresponding to the current symbol.
+In the Java implementation a Map is used: Map<String, Map<Character, String>>.
+This means that it will have the states names as keys and will give all possible outcomes as values (depending on the character, which is yet another key, it will move to the next state, which is the value).
+For example, if i have 'q0', 'q1' and 'q2' as state names, the transition function could read that if i use 'q0' as a key, then it will check what symbol is currently reading, and, in consequence, it will move to the corresponding state.
+For instance, if 'q0' had more than one transition available, then the regularlanguages.DFA will pick the one corresponding to the current symbol.
 
